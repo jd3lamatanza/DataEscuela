@@ -1,5 +1,3 @@
--- DataEscuela: roles y perfiles de usuario.
--- Ejecutar en Supabase SQL Editor o con el cliente PostgreSQL autenticado.
 create extension if not exists pgcrypto;
 
 create table if not exists public.roles (
@@ -27,10 +25,8 @@ alter table public.users alter column username set not null;
 create unique index if not exists users_username_key on public.users (username);
 
 insert into public.roles (slug, name) values
-  ('escuela', 'Escuela'),
-  ('inspector', 'Inspector'),
-  ('jefatura', 'Jefatura'),
-  ('admin', 'Administrador')
+  ('escuela', 'Escuela'), ('inspector', 'Inspector'),
+  ('jefatura', 'Jefatura'), ('admin', 'Administrador')
 on conflict (slug) do update set name = excluded.name, is_active = true;
 
 alter table public.roles enable row level security;
@@ -45,12 +41,3 @@ drop policy if exists "users can read own profile" on public.users;
 create policy "users can read own profile"
 on public.users for select to authenticated
 using (uuid = auth.uid());
-
--- Luego de crear el usuario en Authentication > Users, ejecutá esto,
--- reemplazando el correo y el nombre si fuera necesario:
--- insert into public.users (uuid, role_uuid, username, email, full_name)
--- select au.id, r.uuid, '0001', au.email, 'Administrador'
--- from auth.users au cross join public.roles r
--- where au.email = 'nudos.j3@gmail.com' and r.slug = 'admin'
--- on conflict (uuid) do update set role_uuid = excluded.role_uuid,
--- username = excluded.username, full_name = excluded.full_name, is_active = true;
