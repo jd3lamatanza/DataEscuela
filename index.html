@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prueba de conexión de DataEscuela con Supabase.">
+  <title>DataEscuela · Prueba de conexión</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">D</span><span><strong>DataEscuela</strong><small>Prueba de conexión</small></span></div>
+      <span id="environment" class="environment">GitHub Pages</span>
+    </header>
+
+    <section class="hero">
+      <span class="eyebrow">Diagnóstico inicial</span>
+      <h1>Conexión con la base de datos</h1>
+      <p>Verificá que la página publicada pueda comunicarse con tu proyecto Supabase antes de construir los módulos de DataEscuela.</p>
+      <button id="testButton" class="primary-button" type="button"><span>↻</span> Probar conexión</button>
+    </section>
+
+    <section class="status-grid" aria-label="Resultados de conexión">
+      <article id="apiCard" class="status-card pending"><div class="status-icon">◌</div><div><span class="status-label">API de Supabase</span><strong id="apiStatus">Pendiente</strong><p id="apiDetail">Todavía no se ejecutó la prueba.</p></div></article>
+      <article id="databaseCard" class="status-card pending"><div class="status-icon">▦</div><div><span class="status-label">Base de datos</span><strong id="databaseStatus">Pendiente</strong><p id="databaseDetail">Se probará la tabla public.roles.</p></div></article>
+    </section>
+
+    <section class="details panel">
+      <div class="panel-heading"><div><span class="eyebrow">Configuración activa</span><h2>Proyecto Supabase</h2></div><span id="projectBadge" class="badge">Configurado</span></div>
+      <dl><div><dt>URL</dt><dd id="projectUrl"></dd></div><div><dt>Clave</dt><dd><span class="key-safe">Publishable key · protegida visualmente</span></dd></div></dl>
+    </section>
+
+    <p id="message" class="message" role="status"></p>
+    <footer>La publishable key puede estar en el frontend. Nunca publiques una secret key.</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
